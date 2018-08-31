@@ -1,24 +1,28 @@
 import React from 'react';
 import glamorous from 'glamorous';
 import PropTypes from 'prop-types';
+import { observer } from 'mobx-react';
+import { withRouter } from 'react-router';
 import { Redirect } from 'react-router-dom';
 import ReactTable from 'react-table';
 import 'react-table/react-table.css';
 import SingleColumn from '../../../components/layout/SingleColumn';
 import ActionAnchor from '../../../components/atoms/ActionAnchor';
+import Loader from '../../../components/atoms/Loader';
+import routesStore from '../RoutesStore';
 
 const TableActions = glamorous.div({
   marginBottom: 20,
 });
 
+@observer
 class RoutesIndex extends React.Component {
   static propTypes = {
-    onFetchRoutes: PropTypes.func,
     routes: PropTypes.arrayOf(PropTypes.shape({ routeId: PropTypes.number })),
+    state: PropTypes.oneOf(['pending', 'done', 'error']).isRequired,
   };
 
   static defaultProps = {
-    onFetchRoutes: () => {},
     routes: [],
   };
 
@@ -28,7 +32,7 @@ class RoutesIndex extends React.Component {
   }
 
   componentDidMount = () => {
-    this.props.onFetchRoutes();
+    routesStore.fetchRoutes();
   }
 
   handleCellClick = (rowInfo) => {
@@ -36,11 +40,12 @@ class RoutesIndex extends React.Component {
   }
 
   render() {
-    console.log(this.props.routes);
+    const isLoading = (this.props.state === 'pending');
+    console.log(isLoading);
     return (
       <div>
         <SingleColumn>
-          <h1>Routes</h1>
+          {isLoading && <Loader />}<h1>Routes</h1>
           <TableActions>
             <ActionAnchor
               href="/routes/add"
@@ -49,7 +54,7 @@ class RoutesIndex extends React.Component {
             />
           </TableActions>
           {this.state.selectedRoute && <Redirect push to={`/routes/view/${this.state.selectedRoute}`} />}
-          <ReactTable
+          {!isLoading && <ReactTable
             className="-striped -highlight"
             columns={[
               {
@@ -65,12 +70,13 @@ class RoutesIndex extends React.Component {
                  accessor: 'routeDescription',
                 },
             ]}
+            data={this.props.routes}
             getTdProps={(state, rowInfo) => (
               {
                 onClick: () => { this.handleCellClick(rowInfo); },
               }
             )}
-          />
+          /> }
         </SingleColumn>
       </div>
     );

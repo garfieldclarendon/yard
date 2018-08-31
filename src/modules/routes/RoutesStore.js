@@ -4,11 +4,11 @@ import enhancedFetch from '../../utils/enhancedFetch';
 
 class RoutesStore {
   @observable state;
-  @observable routes;
+  @observable trainRoutes;
 
   constructor() {
     this.state = 'pending'; // pending, done, error
-    this.routes = [];
+    this.trainRoutes = [];
   }
 
   async fetchRoutesCall(data) {
@@ -23,25 +23,18 @@ class RoutesStore {
   }
 
   @action('Fetch Routes')
-  fetchRoutes = async (data) => {
-    const route = await this.fetchRoutesCall(data);
-    runInAction('Update State after fetching Routes', () => {
-      this.routes = route.routes;
+  fetchRoutes() {
+    this.state = 'pending';
+    this.fetchRoutesRequest();
+  }
 
+
+  fetchRoutesRequest = async (data) => {
+    const routesData = await this.fetchRoutesCall(data);
+    runInAction('Update State after fetching Routes', () => {
+      this.trainRoutes = routesData;
+      this.state = 'done';
     });
-    /* return enhancedFetch(
-      '/route/add',
-      {
-        body: data,
-        method: 'post',
-      },
-    )
-      .then((response) => {
-        this.routeDescription = response.routeDescription;
-        this.routeName = response.routeName;
-        this.routeID = response.routeID;
-      })
-      .catch(error => console.error('Error:', error)); */
   };
 }
 
