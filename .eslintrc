@@ -1,0 +1,26 @@
+{
+    "parser": "babel-eslint",
+    "env": {
+        "browser": true,
+        "node": true,
+        "jest": true
+    },
+    "extends": "airbnb",
+    "rules": {
+      "class-methods-use-this": 0,
+      "jsx-a11y/anchor-is-valid": 0,
+      "filenames/match-exported": [2, ['pascal', 'camel']],
+      "import/extensions": 0,
+      "import/no-extraneous-dependencies": 0,
+      "import/no-unresolved": 0,
+      "no-return-assign": 0,
+      "import/prefer-default-export": 0,
+      "react/jsx-boolean-value": 0,
+      "react/jsx-no-bind": 0,
+      "react/no-find-dom-node": 0,
+      "sort-keys": ["error", "asc", {"caseSensitive": true, "natural": false}],
+    },
+    "plugins": [
+      "filenames"
+    ]
+}

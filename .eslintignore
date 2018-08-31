@@ -1,0 +1,8 @@
+# TODO: fix a lot of this
+
+coverage/*
+bin/*
+public/*
+routes/*
+views/*
+app.js
