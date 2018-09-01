@@ -5,11 +5,9 @@ import routeStore from '../RouteStore';
 
 const RouteViewContainer = observer(() => (
   <RouteView
-    deviceID={routeStore.deviceID}
-    routeEntryID={routeStore.routeEntryID}
     routeID={routeStore.routeID}
+    routeDetails={routeStore.routeDetails}
     state={routeStore.state}
-    turnoutState={routeStore.turnoutState}
     routeName={routeStore.routeName}
     routeDescription={routeStore.routeDescription}
   />

@@ -10,57 +10,57 @@ import routeStore from '../RouteStore';
 @observer
 class RouteView extends React.Component {
   static propTypes = {
-    deviceID: PropTypes.string,
     match: PropTypes.shape({
       params: PropTypes.shape({
         routeID: PropTypes.string,
       }),
     }).isRequired,
     routeDescription: PropTypes.string,
-    routeEntryID: PropTypes.string,
+    routeDetails: PropTypes.shape(),
     routeID: PropTypes.string,
     routeName: PropTypes.string,
     state: PropTypes.oneOf(['pending', 'done', 'error']).isRequired,
-    turnoutState: PropTypes.string,
   };
 
   static defaultProps = {
-    deviceID: '',
     routeDescription: '',
-    routeEntryID: '',
+    routeDetails: [],
     routeID: '',
     routeName: '',
-    turnoutState: '',
   }
 
   componentDidMount = () => {
     routeStore.changeRouteToFetch(this.props.match.params.routeID);
   }
 
+  renderSwitch(details) {
+    return (
+      <div key={`switch-${details.routeEntryID}`}>
+        <h4>Switch #{details.routeEntryID}</h4>
+        <b>Current state:</b> {details.turnoutState === '1' ? 'Open' : 'Closed'}
+      </div>
+    );
+  }
+
   render() {
     const {
-      deviceID,
       routeDescription,
+      routeDetails,
       routeName,
-      routeEntryID,
       routeID,
       state,
-      turnoutState,
     } = this.props;
 
     const isLoading = (state === 'pending');
-
     return (
       <SingleColumn>
-        {isLoading && <Loader />}<h2>Route #{routeID}</h2>
+        {isLoading && <Loader />}<h2>Route {routeName} #{routeID}</h2>
         <ul>
           <li><b>Name: </b> {routeName}</li>
           <li><b>Route Desciption: </b> {routeDescription}</li>
-          <li><b>Route entityID: </b> {routeEntryID}</li>
-          <li><b>RouteID: </b> {routeID}</li>
-          <li><b>Route View for: </b> {deviceID}</li>
-          <li><b>Turnout State: </b>{turnoutState}</li>
         </ul>
+        <h3>Linked Switches</h3>
+        { routeDetails.map((switchItem, i) => this.renderSwitch(switchItem, i)) }
       </SingleColumn>
     );
   }
