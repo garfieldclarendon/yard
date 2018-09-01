@@ -26,6 +26,10 @@ router.get('/signals', function(req, res, next) {
   res.render('index', { title: 'Signals' });
 });
 
+router.get('/collections', function(req, res, next) {
+  res.render('index', { title: 'Signals' });
+});
+
 router.get('/routesJSON', (req, res) => {
   fetch('http://apitest2.entrydns.org:8080/api/route_list', {
     headers: {
