@@ -6,10 +6,7 @@ class BaseStore {
 
   constructor() {
     this.state = 'pending'; // pending, done, error
-    this.routeID = null;
-    this.routeDescription = null;
-    this.routeName = null;
-    this.routeDetails = [];
+    this.devices = [];
   }
 
   async baseDataCall() {
@@ -27,6 +24,7 @@ class BaseStore {
     const devices = await this.baseDataCall(data);
     runInAction('Update State after fetching base data', () => {
       this.devices = devices;
+      this.state = 'done';
     });
   };
 }

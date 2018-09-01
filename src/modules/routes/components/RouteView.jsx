@@ -5,6 +5,7 @@ import { withRouter } from 'react-router';
 import SingleColumn from '../../../components/layout/SingleColumn';
 import Loader from '../../../components/atoms/Loader';
 import routeStore from '../RouteStore';
+import baseStore from '../../../components/BaseStore';
 
 @withRouter
 @observer
@@ -33,12 +34,17 @@ class RouteView extends React.Component {
     routeStore.changeRouteToFetch(this.props.match.params.routeID);
   }
 
+  findSwitchDetails = deviceID =>
+    baseStore.devices.filter(device => device.deviceID == deviceID);
+
   renderSwitch(details) {
+    const switchDetails = this.findSwitchDetails(details.routeEntryID)[0] || {};
     return (
-      <div key={`switch-${details.routeEntryID}`}>
-        <h4>Switch #{details.routeEntryID}</h4>
+      <li key={`switch-${details.routeEntryID}`}>
+        <h4>Switch {switchDetails.deviceName} #{details.routeEntryID}</h4>
         <b>Current state:</b> {details.turnoutState === '1' ? 'Open' : 'Closed'}
-      </div>
+        <p>{switchDetails.deviceDescription}</p>
+      </li>
     );
   }
 
@@ -60,7 +66,9 @@ class RouteView extends React.Component {
           <li><b>Route Desciption: </b> {routeDescription}</li>
         </ul>
         <h3>Linked Switches</h3>
-        { routeDetails.map((switchItem, i) => this.renderSwitch(switchItem, i)) }
+        <ul>
+          {routeDetails.map((switchItem, i) => this.renderSwitch(switchItem, i))}
+        </ul>
       </SingleColumn>
     );
   }
