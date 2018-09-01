@@ -6,16 +6,20 @@ const router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Template' });
+  res.render('index', { title: 'LCS' });
 });
 router.get('/routes', function(req, res, next) {
-  res.render('index', { title: 'Template' });
+  res.render('index', { title: 'Routes' });
 });
 router.get('/routes/add', function(req, res, next) {
-  res.render('index', { title: 'Template' });
+  res.render('index', { title: 'Routes: Add' });
 });
 router.get('/routes/view/:routeID', function(req, res, next) {
-  res.render('index', { title: 'Template' });
+  res.render('index', { title: 'Routes: Detail' });
+});
+
+router.get('/turnouts', function(req, res, next) {
+  res.render('index', { title: 'Turnouts' });
 });
 
 router.get('/routesJSON', (req, res) => {

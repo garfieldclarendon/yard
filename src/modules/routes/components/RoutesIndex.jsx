@@ -15,6 +15,7 @@ const TableActions = glamorous.div({
   marginBottom: 20,
 });
 
+@withRouter
 @observer
 class RoutesIndex extends React.Component {
   static propTypes = {
@@ -41,7 +42,6 @@ class RoutesIndex extends React.Component {
 
   render() {
     const isLoading = (this.props.state === 'pending');
-    console.log(isLoading);
     return (
       <div>
         <SingleColumn>

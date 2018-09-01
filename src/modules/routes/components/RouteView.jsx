@@ -39,6 +39,7 @@ class RouteView extends React.Component {
 
   renderSwitch(details) {
     const switchDetails = this.findSwitchDetails(details.routeEntryID)[0] || {};
+    console.log(switchDetails);
     return (
       <li key={`switch-${details.routeEntryID}`}>
         <h4>Switch {switchDetails.deviceName} #{details.routeEntryID}</h4>
