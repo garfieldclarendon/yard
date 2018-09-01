@@ -8,6 +8,8 @@
     "extends": "airbnb",
     "rules": {
       "class-methods-use-this": 0,
+      "jsx-a11y/label-has-for": 0,
+      "jsx-a11y/label-has-associated-control": 0,
       "jsx-a11y/anchor-is-valid": 0,
       "filenames/match-exported": [2, ['pascal', 'camel']],
       "import/extensions": 0,
@@ -18,6 +20,7 @@
       "react/jsx-boolean-value": 0,
       "react/jsx-no-bind": 0,
       "react/no-find-dom-node": 0,
+      "react/jsx-filename-extension": 0,
       "sort-keys": ["error", "asc", {"caseSensitive": true, "natural": false}],
     },
     "plugins": [

@@ -10,8 +10,8 @@ import Loader from '../../../components/atoms/Loader';
 @observer
 class TurnoutsIndex extends React.Component {
   static propTypes = {
-    turnouts: PropTypes.shape({}),
     state: PropTypes.oneOf(['pending', 'done', 'error']).isRequired,
+    turnouts: PropTypes.shape({}),
   };
 
   static defaultProps = {

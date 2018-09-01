@@ -41,11 +41,15 @@ class RoutesIndex extends React.Component {
   }
 
   render() {
-    const isLoading = (this.props.state === 'pending');
+    const { state, routes } = this.props;
+    const { selectedRoute } = this.state;
+    const isLoading = (state === 'pending');
+    console.log(selectedRoute);
     return (
       <div>
         <SingleColumn>
-          {isLoading && <Loader />}<h1>Routes</h1>
+          {isLoading && <Loader />}
+          <h1>Routes</h1>
           <TableActions>
             <ActionAnchor
               href="/routes/add"
@@ -53,30 +57,33 @@ class RoutesIndex extends React.Component {
               text="Add One"
             />
           </TableActions>
-          {this.state.selectedRoute && <Redirect push to={`/routes/view/${this.state.selectedRoute}`} />}
-          {!isLoading && <ReactTable
-            className="-striped -highlight"
-            columns={[
-              {
-                Header: 'ID',
-                accessor: 'routeID',
-              },
-              {
-                Header: 'Name',
-                accessor: 'routeName',
-               },
-               {
-                 Header: 'Description',
-                 accessor: 'routeDescription',
+          {selectedRoute && <Redirect push to={`/routes/view/${selectedRoute}`} />}
+          {!isLoading
+            && (
+            <ReactTable
+              className="-striped -highlight"
+              columns={[
+                {
+                  Header: 'ID',
+                  accessor: 'routeID',
                 },
-            ]}
-            data={this.props.routes}
-            getTdProps={(state, rowInfo) => (
-              {
-                onClick: () => { this.handleCellClick(rowInfo); },
-              }
+                {
+                  Header: 'Name',
+                  accessor: 'routeName',
+                },
+                {
+                  Header: 'Description',
+                  accessor: 'routeDescription',
+                },
+              ]}
+              data={routes}
+              getTdProps={(stateInfo, rowInfo) => (
+                {
+                  onClick: () => { this.handleCellClick(rowInfo); },
+                }
+              )}
+            />
             )}
-          /> }
         </SingleColumn>
       </div>
     );
