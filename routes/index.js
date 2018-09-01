@@ -61,6 +61,21 @@ router.post('/route/add', async (req, res) => {
   await res.json(json);
 });
 
+router.get('/devices', (req, res) => {
+  fetch('http://apitest2.entrydns.org:8080/api/device_list', {
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+      'X-Requested-With': 'XMLHttpRequest',
+    },
+  })
+  .then((response) => response.json())
+  .then((devices) => {
+    res.json(devices);
+  })
+  .catch(err => res.json({error: 'Unable to reach server'}));
+});
+
 router.get('/entityJSON/:entityType/:entityID', (req, res) => {
   fetch(`http://apitest2.entrydns.org:8080/api/entity/${req.params.entityType}?id=${req.params.entityID}`, {
     headers: {
