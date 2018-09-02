@@ -3,7 +3,7 @@ import glamorous from 'glamorous';
 import PropTypes from 'prop-types';
 import { zIndex } from 'config/styles';
 import Header from '../organisms/Header';
-import MainNavigation from '../organisms/MainNavigation';
+import SubNavigation from '../organisms/SubNavigation';
 
 const StyledSection = glamorous.section({
   margin: 20,
@@ -14,7 +14,7 @@ const StyledSection = glamorous.section({
 const SingleColumn = ({ children }) => (
   <div>
     <Header />
-    <MainNavigation />
+    <SubNavigation />
     <StyledSection>
       {children}
     </StyledSection>

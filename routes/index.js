@@ -8,26 +8,30 @@ const router = express.Router();
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'LCS' });
 });
-router.get('/routes', function(req, res, next) {
+router.get('/configure/routes', function(req, res, next) {
   res.render('index', { title: 'Routes' });
 });
-router.get('/routes/add', function(req, res, next) {
+router.get('/configure/routes/add', function(req, res, next) {
   res.render('index', { title: 'Routes: Add' });
 });
-router.get('/routes/view/:routeID', function(req, res, next) {
+router.get('/configure/routes/view/:routeID', function(req, res, next) {
   res.render('index', { title: 'Routes: Detail' });
 });
 
-router.get('/turnouts', function(req, res, next) {
+router.get('/configure/turnouts', function(req, res, next) {
   res.render('index', { title: 'Turnouts' });
 });
 
-router.get('/signals', function(req, res, next) {
+router.get('/configure/signals', function(req, res, next) {
   res.render('index', { title: 'Signals' });
 });
 
-router.get('/collections', function(req, res, next) {
+router.get('/configure/collections', function(req, res, next) {
   res.render('index', { title: 'Signals' });
+});
+
+router.get('/help', function(req, res, next) {
+  res.render('index', { title: 'Help' });
 });
 
 router.get('/routesJSON', (req, res) => {
