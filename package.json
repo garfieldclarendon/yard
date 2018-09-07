@@ -7,7 +7,7 @@
     "dev": "webpack-dev-server --hot --config webpack.config.dev.js",
     "lint": "eslint --ext .js --ext .jsx .",
     "test": "npm run lint && jest --coverage",
-    "start": "check-node-version --node $(cat .nvmrc) --npm 5.5.1 && concurrently --kill-others \"npm run server\" \"npm run webpack-dev-server\"",
+    "start": "check-node-version --node $(cat .nvmrc) --npm 5.6.0 && concurrently --kill-others \"npm run server\" \"npm run webpack-dev-server\"",
     "server": "./bin/www",
     "webpack-dev-server": "node start-webpack-dev-server.js"
   },
