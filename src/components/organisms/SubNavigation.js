@@ -26,8 +26,16 @@ const StyledUL = glamorous.ul({
   padding: spacing.boxPadding,
 });
 
-const SubNavigation = () => (
-  <StyledUL>
+const showRunItems = () => (
+  <React.Fragment>
+    <li>
+      <a href="#">CA</a>
+    </li>
+  </React.Fragment>
+);
+
+const showConfigureItems = () => (
+  <React.Fragment>
     <li>
       <NavLink activeClassName="active" to="/configure/collections">Collections</NavLink>
     </li>
@@ -43,6 +51,14 @@ const SubNavigation = () => (
     <li>
       <NavLink activeClassName="active" to="/help">Help</NavLink>
     </li>
+  </React.Fragment>
+);
+
+const isConfigurePath = location.pathname.includes('configure'); // eslint-disable-line no-restricted-globals
+
+const SubNavigation = () => (
+  <StyledUL>
+    {isConfigurePath ? showConfigureItems() : showRunItems()}
   </StyledUL>
 );
 

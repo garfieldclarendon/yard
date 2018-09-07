@@ -10,6 +10,7 @@ import RouteAddContainer from '../modules/routes/containers/RouteAddContainer';
 import TurnoutsContainer from '../modules/turnouts/containers/TurnoutsContainer';
 import SignalsContainer from '../modules/signals/containers/SignalsContainer';
 import CollectionsContainer from '../modules/collections/containers/CollectionsContainer';
+import BoardsContainer from '../modules/boards/containers/BoardsContainer';
 
 @observer
 class Base extends React.Component {
@@ -28,6 +29,7 @@ class Base extends React.Component {
           <Route exact path="/configure/turnouts" component={TurnoutsContainer} />
           <Route exact path="/configure/signals" component={SignalsContainer} />
           <Route exact path="/configure/collections" component={CollectionsContainer} />
+          <Route exact path="/run/boards" component={BoardsContainer} />
           <Route exact path="/help" component={Help} />
         </div>
       </BrowserRouter>);

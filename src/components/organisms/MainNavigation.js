@@ -34,10 +34,10 @@ const checkConfigureActive = (match, location) => location.pathname.includes('co
 const MainNavigation = () => (
   <StyledUL>
     <li>
-      <NavLink isActive={checkConfigureActive} activeClassName="active" to="/collections">Configure</NavLink>
+      <NavLink isActive={checkConfigureActive} activeClassName="active" to="/configure/collections">Configure</NavLink>
     </li>
     <li>
-      <NavLink activeClassName="active" to="/boards">Run</NavLink>
+      <NavLink activeClassName="active" to="/run/boards">Run</NavLink>
     </li>
   </StyledUL>
 );

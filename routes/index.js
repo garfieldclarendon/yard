@@ -8,6 +8,9 @@ const router = express.Router();
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'LCS' });
 });
+router.get('/configure', function(req, res, next) {
+  res.render('index', { title: 'Collections' });
+});
 router.get('/configure/routes', function(req, res, next) {
   res.render('index', { title: 'Routes' });
 });
@@ -28,6 +31,14 @@ router.get('/configure/signals', function(req, res, next) {
 
 router.get('/configure/collections', function(req, res, next) {
   res.render('index', { title: 'Signals' });
+});
+
+router.get('/run', function(req, res, next) {
+  res.render('index', { title: 'Boards' });
+});
+
+router.get('/run/boards', function(req, res, next) {
+  res.render('index', { title: 'Boards' });
 });
 
 router.get('/help', function(req, res, next) {
