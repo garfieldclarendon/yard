@@ -41,6 +41,10 @@ router.get('/run/boards', function(req, res, next) {
   res.render('index', { title: 'Boards' });
 });
 
+router.get('/run/boards/view/:boardID', function(req, res, next) {
+  res.render('index', { title: 'Routes: Detail' });
+});
+
 router.get('/help', function(req, res, next) {
   res.render('index', { title: 'Help' });
 });
