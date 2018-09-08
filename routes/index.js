@@ -3,6 +3,8 @@ require('es6-promise').polyfill();
 require('isomorphic-fetch');
 
 const router = express.Router();
+const serverAddress = "http://apitest2.entrydns.org:8080";
+// const serverAddress = "http://10.206.1.252:8080";
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -50,7 +52,7 @@ router.get('/help', function(req, res, next) {
 });
 
 router.get('/routesJSON', (req, res) => {
-  fetch('http://apitest2.entrydns.org:8080/api/route_list', {
+  fetch(`${serverAddress}/api/route_list`, {
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json',
@@ -65,7 +67,7 @@ router.get('/routesJSON', (req, res) => {
 });
 
 router.get('/routeJSON/:routeID', (req, res) => {
-  fetch(`http://apitest2.entrydns.org:8080/api/route_entry_list?routeID=${req.params.routeID}`, {
+  fetch(`${serverAddress}/api/route_entry_list?routeID=${req.params.routeID}`, {
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json',
@@ -80,7 +82,7 @@ router.get('/routeJSON/:routeID', (req, res) => {
 });
 
 router.post('/route/add', async (req, res) => {
-  const response = await fetch('http://APITest2.entrydns.org:8080/api/entity/route', {
+  const response = await fetch(`${serverAddress}/api/entity/route`, {
     method: 'POST',
     body: JSON.stringify(req.body),
     headers: {
@@ -93,7 +95,7 @@ router.post('/route/add', async (req, res) => {
 });
 
 router.get('/devices', (req, res) => {
-  fetch('http://apitest2.entrydns.org:8080/api/device_list', {
+  fetch(`${serverAddress}/api/device_list`, {
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json',
@@ -108,7 +110,7 @@ router.get('/devices', (req, res) => {
 });
 
 router.get('/entityJSON/:entityType/:entityID', (req, res) => {
-  fetch(`http://apitest2.entrydns.org:8080/api/entity/${req.params.entityType}?id=${req.params.entityID}`, {
+  fetch(`${serverAddress}/api/entity/${req.params.entityType}?id=${req.params.entityID}`, {
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json',

@@ -19,12 +19,16 @@ class TurnoutsIndex extends React.Component {
   };
 
   findTurnoutDetails = devices =>
-    devices.filter(device => device.deviceClass === '2');
+    devices.filter(device => device.deviceClass === '1');
 
   render() {
+    // State: 0 Unknown (probably not hooked up)
+    // State: 1 Normal
+    // State: 2 Throwing to diverging
+    // State: 3 diverging
+    // State: 4 Throwing to normal
     const isLoading = (this.props.state === 'pending');
     const turnoutData = this.findTurnoutDetails(this.props.turnouts);
-    console.log(turnoutData);
     return (
       <div>
         <SingleColumn>

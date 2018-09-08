@@ -23,7 +23,7 @@ class RouteAdd extends React.Component {
   render() {
     const { routeID } = this.props;
     return routeID
-      ? <Redirect to={`/routes/view/${this.props.routeID}`} /> : (
+      ? <Redirect to={`configure/routes/view/${this.props.routeID}`} /> : (
         <div>
           <SingleColumn>
             <Form

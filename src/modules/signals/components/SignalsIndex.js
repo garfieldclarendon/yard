@@ -17,7 +17,8 @@ class SignalsIndex extends React.Component {
     signals: [],
   };
 
-  findTurnoutDetails = devices => devices.filter(device => device.deviceClass === '3');
+  // 5 is sephamore
+  findTurnoutDetails = devices => devices.filter(device => device.deviceClass === '4');
 
   render() {
     const { state, signals } = this.props;
@@ -41,10 +42,6 @@ class SignalsIndex extends React.Component {
                   {
                     Header: 'Desciption',
                     accessor: 'deviceDescription',
-                  },
-                  {
-                    Header: 'state',
-                    accessor: 'deviceState',
                   },
                 ]}
                 data={signalData}

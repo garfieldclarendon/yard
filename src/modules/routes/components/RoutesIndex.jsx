@@ -40,11 +40,23 @@ class RoutesIndex extends React.Component {
     this.setState({ selectedRoute: rowInfo.row.routeID });
   }
 
+  formatRoutes = (routesData) => {
+    const updatedRoutes = routesData.map((route) => {
+      const routeObj = {
+        ...route,
+        canLock: route.canLock ? 'Yes' : 'No',
+        isActive: route.isActive ? 'Yes' : 'No',
+        isLocked: route.isLocked ? 'Yes' : 'No',
+      };
+      return routeObj;
+    });
+    return updatedRoutes;
+  }
+
   render() {
     const { state, routes } = this.props;
     const { selectedRoute } = this.state;
     const isLoading = (state === 'pending');
-    console.log(selectedRoute);
     return (
       <div>
         <SingleColumn>
@@ -52,12 +64,12 @@ class RoutesIndex extends React.Component {
           <h1>Routes</h1>
           <TableActions>
             <ActionAnchor
-              href="/routes/add"
+              href="/configure/routes/add"
               isSolid={true}
               text="Add One"
             />
           </TableActions>
-          {selectedRoute && <Redirect push to={`/routes/view/${selectedRoute}`} />}
+          {selectedRoute && <Redirect push to={`/configure/routes/view/${selectedRoute}`} />}
           {!isLoading
             && (
             <ReactTable
@@ -75,8 +87,16 @@ class RoutesIndex extends React.Component {
                   Header: 'Description',
                   accessor: 'routeDescription',
                 },
+                {
+                  Header: 'Lockable',
+                  accessor: 'isLocked',
+                },
+                {
+                  Header: 'Active',
+                  accessor: 'isActive',
+                },
               ]}
-              data={routes}
+              data={this.formatRoutes(routes)}
               getTdProps={(stateInfo, rowInfo) => (
                 {
                   onClick: () => { this.handleCellClick(rowInfo); },

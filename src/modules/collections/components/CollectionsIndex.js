@@ -17,6 +17,9 @@ class CollectionsIndex extends React.Component {
     collections: [],
   };
 
+  // Switch must have input and one output
+  // Device class 2 is buttons and inputs
+  // LEDs are outputs and 3
   findTurnoutDetails = devices => devices.filter(device => device.deviceClass === '6');
 
   render() {
@@ -24,6 +27,11 @@ class CollectionsIndex extends React.Component {
     const isLoading = (state === 'pending');
     const collectionData = this.findTurnoutDetails(collections);
     console.log(collectionData);
+    /*
+    0: Unknown
+    1: Unoccupied
+    2: Occupied
+    */
     return (
       <div>
         <SingleColumn>
