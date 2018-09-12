@@ -1,7 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const CtcSwitchBackground = ({ type }) => (
+const transformType = (type) => {
+  let value = '';
+  if (type === 'Switch') {
+    value = 'SWITCH';
+  } else if (type === 'Signal') {
+    value = 'SIGNAL';
+  } else if (type === 'Lock') {
+    value = 'Lock';
+  }
+  return value;
+};
+
+const CtcSwitchBackground = ({ name, type }) => (
   <svg
     height="104px"
     viewBox="0 0 92 104"
@@ -26,7 +38,16 @@ const CtcSwitchBackground = ({ type }) => (
           fontWeight="400"
           id="SWITCH"
         >
-          <tspan x="23.1845703" y="38.7885692">{type === 'Switch' ? 'SWITCH' : 'LOCK'}</tspan>
+          <tspan x="40" y="18">{name}</tspan>
+        </text>
+        <text
+          fill="#CCCAB1"
+          fontFamily="Futura-Medium, Futura"
+          fontSize="9"
+          fontWeight="400"
+          id="SWITCH"
+        >
+          <tspan x="23.1845703" y="38.7885692">{transformType(type)}</tspan>
         </text>
         <text
           fontFamily="Futura-Medium, Futura"
@@ -54,7 +75,8 @@ const CtcSwitchBackground = ({ type }) => (
 );
 
 CtcSwitchBackground.propTypes = {
-  type: PropTypes.oneOf(['Switch', 'Lock']),
+  name: PropTypes.string.isRequired,
+  type: PropTypes.oneOf(['Signal', 'Switch', 'Lock']),
 };
 
 CtcSwitchBackground.defaultProps = {
