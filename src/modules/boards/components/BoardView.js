@@ -2,7 +2,9 @@ import React from 'react';
 import glamorous from 'glamorous';
 import { withRouter } from 'react-router';
 import SingleColumn from '../../../components/layout/SingleColumn';
+import CtcColumn from '../../../components/molecules/CtcColumn';
 import CtcSwitchGroup from '../../../components/molecules/CtcSwitchGroup';
+import boardStore from '../BoardStore';
 
 const BoardWrapper = glamorous.div({
   '& .positionLight': {
@@ -13,7 +15,6 @@ const BoardWrapper = glamorous.div({
     width: '20px',
   },
   background: '#566E58',
-  height: '500px',
   position: 'relative',
 });
 
@@ -58,11 +59,17 @@ class BoardView extends React.Component {
                 </g>
               </g>
           </svg>
-          <CtcSwitchGroup
-            hideRight={true}
-            name="S1"
-            type="Signal"
-          />
+          <CtcColumn handleExecute={() => { boardStore.activateTurnout(6, 3); }}>
+            <CtcSwitchGroup
+              hideRight={true}
+              name="S1"
+              type="Signal"
+            />
+            <CtcSwitchGroup
+              name="S1"
+              type="Switch"
+            />
+          </CtcColumn>
         </BoardWrapper>
       </SingleColumn>
     );

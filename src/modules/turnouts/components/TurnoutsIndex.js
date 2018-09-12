@@ -48,6 +48,10 @@ class TurnoutsIndex extends React.Component {
                  Header: 'state',
                  accessor: 'deviceState',
                 },
+                {
+                  Header: 'deviceID',
+                  accessor: 'deviceID',
+                 },
             ]}
             data={turnoutData}
             getTdProps={(state, rowInfo) => (

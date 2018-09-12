@@ -124,4 +124,21 @@ router.get('/entityJSON/:entityType/:entityID', (req, res) => {
   .catch(err => res.json({error: 'Unable to reach server'}));
 });
 
+router.get('/activateTurnout/:deviceID/:turnoutState', (req, res) => {
+  console.log(`${serverAddress}/api/activate_turnout?deviceID=${req.params.deviceID}&turnoutState=${req.params.turnoutState}`);
+  fetch(`${serverAddress}/api/activate_turnout?deviceID=${req.params.deviceID}&turnoutState=${req.params.turnoutState}`, {
+    headers: {
+      'Content-Type': 'application/json',
+      'X-Requested-With': 'XMLHttpRequest',
+    },
+  })
+  .then((response) => response.json())
+  .then((entity) => {
+    res.json(entity);
+  })
+  .catch(err => res.json({error: 'Unable to reach server'}));
+});
+
+
+
 module.exports = router;

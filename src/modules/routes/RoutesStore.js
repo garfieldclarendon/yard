@@ -1,9 +1,9 @@
 import { observable, action, runInAction } from 'mobx';
-import fetch from 'node-fetch';
 import enhancedFetch from '../../utils/enhancedFetch';
 
 class RoutesStore {
   @observable state;
+
   @observable trainRoutes;
 
   constructor() {

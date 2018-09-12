@@ -48,7 +48,6 @@ const SwitchGroupDiv = glamorous.div({
     top: '15px',
   },
   height: '120px',
-  margin: '10px',
   position: 'relative',
   width: '92px',
 });
@@ -93,10 +92,10 @@ class CtcSwitchGroup extends React.Component {
       position,
     } = this.state;
     return (
-      <SwitchGroupDiv>
+      <SwitchGroupDiv className="switchGroup">
         {!hideLeft && (
         <div className="ledLeft">
-          <CtcLed />
+          <CtcLed color="green" />
         </div>
         )}
         {type === 'Signal' && (
@@ -106,7 +105,7 @@ class CtcSwitchGroup extends React.Component {
         )}
         {!hideRight && (
         <div className="ledRight">
-          <CtcLed />
+          <CtcLed color="green" />
         </div>
         )}
         <div className="backgroundWrapper">
