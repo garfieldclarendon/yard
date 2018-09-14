@@ -43,6 +43,14 @@ class SignalsIndex extends React.Component {
                     Header: 'Desciption',
                     accessor: 'deviceDescription',
                   },
+                  {
+                    Header: 'Device ID',
+                    accessor: 'deviceID',
+                  },
+                  {
+                    Header: 'Device State.',
+                    accessor: 'deviceState',
+                  },
                 ]}
                 data={signalData}
                 getTdProps={(stateData, rowInfo) => (

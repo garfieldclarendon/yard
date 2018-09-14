@@ -20,6 +20,20 @@ const BoardWrapper = glamorous.div({
 
 @withRouter
 class BoardView extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      columns: [
+        {
+          switches: {
+            5: 3,
+          }
+        }
+    ],
+};
+  }
+
+// boardStore.activateTurnout(6, 3);
   render() {
     return (
       <SingleColumn>
@@ -59,13 +73,15 @@ class BoardView extends React.Component {
                 </g>
               </g>
           </svg>
-          <CtcColumn handleExecute={() => { boardStore.activateTurnout(6, 3); }}>
+          <CtcColumn id="column-1" handleExecute={() => { boardStore.activateSignal(21, 1, 'red', 2) }}>
             <CtcSwitchGroup
+              deviceID="Foo"
               hideRight={true}
               name="S1"
               type="Signal"
             />
             <CtcSwitchGroup
+              deviceID="5"
               name="S1"
               type="Switch"
             />

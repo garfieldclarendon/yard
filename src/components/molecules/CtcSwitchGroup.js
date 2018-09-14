@@ -10,7 +10,7 @@ const SwitchWrapper = glamorous.div({
   position: 'absolute',
   top: '70px',
   transformOrigin: 'bottom center',
-  transition: '1s',
+  transition: '.3s',
 },
 ({ rotation }) => ({
   transform: `rotate(${rotation})`,
@@ -26,6 +26,9 @@ const SwitchGroupDiv = glamorous.div({
     display: 'inline-block',
     height: '130px',
     width: '28px',
+  },
+  '& .hitArea.enabled:hover': {
+    cursor: 'pointer',
   },
   '& .hitAreas': {
     left: 0,
@@ -54,30 +57,37 @@ const SwitchGroupDiv = glamorous.div({
 
 class CtcSwitchGroup extends React.Component {
   static propTypes = {
+    deviceID: PropTypes.string.isRequired,
     hideLeft: PropTypes.bool,
     hideRight: PropTypes.bool,
     name: PropTypes.string.isRequired,
+    onSwitched: PropTypes.func,
     type: PropTypes.oneOf(['Signal', 'Switch', 'Lock']),
   };
 
   static defaultProps = {
     hideLeft: false,
     hideRight: false,
+    onSwitched: () => {},
     type: 'Switch',
   };
 
-  constructor() {
-    super();
-    this.state = { position: '0' };
+  constructor(props) {
+    super(props);
+    this.state = { position: props.type === 'Signal' ? '0' : '-35deg' };
   }
 
   changeSelection = (e) => {
-    if (e.target.className.includes('leftHitArea')) {
-      this.setState({ position: '-35deg' });
-    } else if (e.target.className.includes('rightHitArea')) {
-      this.setState({ position: '35deg' });
-    } else {
-      this.setState({ position: '0' });
+    const { deviceID, onSwitched } = this.props;
+    if (e.target.className.includes('enabled')) {
+      if (e.target.className.includes('leftHitArea')) {
+        this.setState({ position: '-35deg' });
+      } else if (e.target.className.includes('rightHitArea')) {
+        this.setState({ position: '35deg' });
+      } else {
+        this.setState({ position: '0' });
+      }
+      onSwitched(deviceID);
     }
   }
 
@@ -110,9 +120,9 @@ class CtcSwitchGroup extends React.Component {
         )}
         <div className="backgroundWrapper">
           <div className="hitAreas">
-            <div className="hitArea leftHitArea" onClick={this.changeSelection} />
-            <div className="hitArea centerHitArea" onClick={this.changeSelection} />
-            <div className="hitArea rightHitArea" onClick={this.changeSelection} />
+            <div className={`hitArea leftHitArea ${!hideLeft ? 'enabled' : ''}`} onClick={this.changeSelection} />
+            <div className={`hitArea centerHitArea ${type === "Signal" ? 'enabled' : ''}`} onClick={this.changeSelection} />
+            <div className={`hitArea rightHitArea ${!hideRight ? 'enabled' : ''}`} onClick={this.changeSelection} />
           </div>
           <SwitchWrapper rotation={position}>
             <CtcSwitch />
