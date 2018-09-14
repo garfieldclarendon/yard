@@ -73,7 +73,11 @@ class BoardView extends React.Component {
                 </g>
               </g>
           </svg>
-          <CtcColumn id="column-1" handleExecute={() => { boardStore.activateSignal(21, 1, 'red', 2) }}>
+          <CtcColumn
+            communication={'working'}
+            id="column-1"
+            handleExecute={() => { boardStore.activateSignal(21, 1, 'red', 2) }}
+          >
             <CtcSwitchGroup
               deviceID="Foo"
               hideRight={true}

@@ -115,7 +115,7 @@ class CtcSwitchGroup extends React.Component {
         )}
         {!hideRight && (
         <div className="ledRight">
-          <CtcLed color="green" />
+          <CtcLed color="yellow" />
         </div>
         )}
         <div className="backgroundWrapper">

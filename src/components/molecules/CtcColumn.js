@@ -30,7 +30,7 @@ const StyledDiv = glamorous.div({
 const mapColor = (communication) => {
   let color = 'white';
   if (communication === 'working') {
-    color = 'red';
+    color = '#CCCCCC';
   } else if (communication === 'error') {
     color = 'red';
   }
@@ -42,7 +42,7 @@ const CtcColumn = ({ children, communication, handleExecute }) => (
     { children }
     <ul>
       <li className="communicationLed">
-        { children && <CtcLed color={mapColor(communication)} />}
+        { children && <CtcLed blinking={communication !== 'idle'} color={mapColor(communication)} />}
       </li>
       <li>
         <CtcExecute onHandleClick={handleExecute} />
