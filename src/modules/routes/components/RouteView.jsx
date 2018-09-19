@@ -2,10 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { observer } from 'mobx-react';
 import { withRouter } from 'react-router';
-import SingleColumn from '../../../components/layout/SingleColumn';
+import SideColumn from '../../../components/layout/SideColumn';
 import Loader from '../../../components/atoms/Loader';
 import routeStore from '../RouteStore';
 import baseStore from '../../../components/BaseStore';
+import Button from '../../../components/atoms/Button';
 
 @withRouter
 @observer
@@ -39,7 +40,6 @@ class RouteView extends React.Component {
 
   renderSwitch(details) {
     const switchDetails = this.findSwitchDetails(details.routeEntryID)[0] || {};
-    console.log(switchDetails);
     return (
       <li key={`switch-${details.routeEntryID}`}>
         <h4>Switch {switchDetails.deviceName} #{details.routeEntryID}</h4>
@@ -47,6 +47,10 @@ class RouteView extends React.Component {
         <p>{switchDetails.deviceDescription}</p>
       </li>
     );
+  }
+
+  renderSidecontent() {
+    return <Button text="Delete" />
   }
 
   render() {
@@ -60,7 +64,7 @@ class RouteView extends React.Component {
 
     const isLoading = (state === 'pending');
     return (
-      <SingleColumn>
+      <SideColumn sideContent={this.renderSidecontent()}>
         {isLoading && <Loader />}<h2>Route {routeName} #{routeID}</h2>
         <ul>
           <li><b>Name: </b> {routeName}</li>
@@ -70,7 +74,7 @@ class RouteView extends React.Component {
         <ul>
           {routeDetails.map((switchItem, i) => this.renderSwitch(switchItem, i))}
         </ul>
-      </SingleColumn>
+      </SideColumn>
     );
   }
 }
